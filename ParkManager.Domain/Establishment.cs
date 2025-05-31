@@ -14,6 +14,9 @@ public class Establishment
     int motorcyclesParkingSpaces, 
     int carsParkingSpaces)
   {
+    if (motorcyclesParkingSpaces < 0 || carsParkingSpaces < 0)
+      throw new DomainException(EstablishmentErros.InvalidParkingSpaces);
+
     Id = Guid.NewGuid();
     Name = name;
     Cnpj = new CNPJ(cnpj);
@@ -33,13 +36,15 @@ public class Establishment
 
   private List<ParkingMovement> _parkingMovementList = [];
 
+  public IReadOnlyList<ParkingMovement> GetParkingMovements() => _parkingMovementList.AsReadOnly();
+
   public void Entry(Vehicle vehicle, DateTime entryDate)
   {
     if (vehicle.IsMotorcycle() && MotorcyclesParkingSpaces <= _parkingMovementList.Count(m => m.Type == EVehicleType.Motorcycle))
-      throw new InvalidOperationException("No available parking spaces for motorcycles.");
+      throw new DomainException(EstablishmentErros.NoAvailableParkingSpacesForMotorcycles);
 
     if (vehicle.IsCar() && CarsParkingSpaces <= _parkingMovementList.Count(m => m.Type == EVehicleType.Car))
-      throw new InvalidOperationException("No available parking spaces for cars.");
+      throw new DomainException(EstablishmentErros.NoAvailableParkingSpacesForCars);
 
     var movement = new ParkingMovement(Id, vehicle.Id, entryDate, null, vehicle.Type);
     
@@ -51,7 +56,7 @@ public class Establishment
     var movement = _parkingMovementList.FirstOrDefault(m => m.VehicleId == vehicleId && m.ExitDate == null);
 
     if (movement == null)
-      throw new InvalidOperationException("Vehicle not found or already exited.");
+      throw new DomainException(EstablishmentErros.VehicleNotFoundOrAlreadyExited);
 
     movement.Exit(exitDate);
   }
@@ -79,6 +84,9 @@ public class ParkingMovement
 
   public void Exit(DateTime exitDate)
   {
+    if (ExitDate.HasValue)
+      throw new DomainException("The vehicle has already exited.");
+
     ExitDate = exitDate;
   }
 }
@@ -110,17 +118,18 @@ public record CNPJ
 
   public CNPJ(string cnpj)
   {
-    if (string.IsNullOrWhiteSpace(cnpj) || cnpj.Length != 14)
-      throw new ArgumentException("CNPJ must be a 14-digit number.", nameof(cnpj));
-
     if (!ValidadeCnpj(cnpj))
-      throw new ArgumentException("CNPJ invalid", nameof(cnpj));
+      throw new DomainException(EstablishmentErros.InvalidCNPJ);
 
     Cnpj = cnpj;
   }
 
   private bool ValidadeCnpj(string cnpj)
   {
+
+    if (string.IsNullOrWhiteSpace(cnpj) || cnpj.Length != 14)
+      return false;
+
     // Implement CNPJ validation logic here
     // This is a placeholder for the actual validation logic
     return true;
