@@ -41,7 +41,7 @@ public class CreateEstablishmentCommandHandler : IRequestHandler<CreateEstablish
     }
     catch (Exception)
     {
-      throw;
+      return Result.Failure<Establishment>(new Error("999", "Error When creating establishment"));
     }
   }
 }
