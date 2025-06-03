@@ -2,6 +2,10 @@
 
 public class Vehicle
 {
+  private Vehicle()
+  {
+    
+  }
   public Vehicle(string branch, string model, string color, string plate, EVehicleType type)
   {
     Id = Guid.NewGuid();

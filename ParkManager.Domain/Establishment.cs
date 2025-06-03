@@ -2,6 +2,10 @@
 
 public class Establishment
 {
+  private Establishment()
+  {
+    
+  }
   public Establishment(string name, 
     string cnpj,
     string city, 
@@ -17,7 +21,7 @@ public class Establishment
     if (motorcyclesParkingSpaces < 0 || carsParkingSpaces < 0)
       throw new DomainException(EstablishmentErros.InvalidParkingSpaces);
 
-    Id = Guid.NewGuid();
+    //Id = Guid.NewGuid();
     Name = name;
     Cnpj = new CNPJ(cnpj);
     Address = new Address(city, state, street, number, complement, zipCode);
