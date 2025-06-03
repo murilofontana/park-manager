@@ -32,9 +32,9 @@ public class CreateEstablishmentCommandHandler : IRequestHandler<CreateEstablish
 
     try
     {
-      await _establishmentRepository.AddAsync(establishment);
+      await _establishmentRepository.AddAsync(establishment, cancellationToken);
 
-      var establishmentInserted = await _establishmentRepository.GetById(establishment.Id);
+      var establishmentInserted = await _establishmentRepository.GetByIdAsync(establishment.Id, cancellationToken);
 
       return Result.Success(establishmentInserted);
 

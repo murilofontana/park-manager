@@ -4,18 +4,18 @@ public class Establishment
 {
   private Establishment()
   {
-    
+
   }
-  public Establishment(string name, 
+  public Establishment(string name,
     string cnpj,
-    string city, 
-    string state, 
-    string street, 
+    string city,
+    string state,
+    string street,
     string number,
     string complement,
     string zipCode,
     string phone,
-    int motorcyclesParkingSpaces, 
+    int motorcyclesParkingSpaces,
     int carsParkingSpaces)
   {
     if (motorcyclesParkingSpaces < 0 || carsParkingSpaces < 0)
@@ -30,13 +30,13 @@ public class Establishment
     CarsParkingSpaces = carsParkingSpaces;
   }
 
-  public Guid Id { get; }
-  public string Name { get; }
-  public CNPJ Cnpj { get; }
-  public Address Address { get; }
-  public string Phone { get; }
-  public int MotorcyclesParkingSpaces { get; }
-  public int CarsParkingSpaces { get; }
+  public Guid Id { get; private set; }
+  public string Name { get; private set; }
+  public CNPJ Cnpj { get; private set; }
+  public Address Address { get; private set; }
+  public string Phone { get; private set; }
+  public int MotorcyclesParkingSpaces { get; private set; }
+  public int CarsParkingSpaces { get; private set; }
 
   private List<ParkingMovement> _parkingMovementList = [];
 
@@ -51,7 +51,7 @@ public class Establishment
       throw new DomainException(EstablishmentErros.NoAvailableParkingSpacesForCars);
 
     var movement = new ParkingMovement(Id, vehicle.Id, entryDate, null, vehicle.Type);
-    
+
     _parkingMovementList.Add(movement);
   }
 
@@ -63,6 +63,30 @@ public class Establishment
       throw new DomainException(EstablishmentErros.VehicleNotFoundOrAlreadyExited);
 
     movement.Exit(exitDate);
+  }
+
+  public void Update(
+        string name,
+        string cnpj,
+        string city,
+        string state,
+        string street,
+        string number,
+        string complement,
+        string zipCode,
+        string phone,
+        int motorcyclesParkingSpaces,
+        int carsParkingSpaces)
+  {
+    if (motorcyclesParkingSpaces < 0 || carsParkingSpaces < 0)
+      throw new DomainException(EstablishmentErros.InvalidParkingSpaces);
+
+    Name = name;
+    Cnpj = new CNPJ(cnpj);
+    Address = new Address(city, state, street, number, complement, zipCode);
+    Phone = phone;
+    MotorcyclesParkingSpaces = motorcyclesParkingSpaces;
+    CarsParkingSpaces = carsParkingSpaces;
   }
 
 }
