@@ -2,6 +2,21 @@
 {
   public record CreateEstablishmentRequest
   {
+    public CreateEstablishmentRequest(string name, string cnpj, string city, string state, string street, string number, string complement, string zipCode, string phone, int motorcyclesParkingSpaces, int carsParkingSpaces)
+    {
+      Name = name;
+      Cnpj = cnpj;
+      City = city;
+      State = state;
+      Street = street;
+      Number = number;
+      Complement = complement;
+      ZipCode = zipCode;
+      Phone = phone;
+      MotorcyclesParkingSpaces = motorcyclesParkingSpaces;
+      CarsParkingSpaces = carsParkingSpaces;
+    }
+
     public string Name { get; set; }
     public string Cnpj { get; set; }
     public string City { get; set; }
