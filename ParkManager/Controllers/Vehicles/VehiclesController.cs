@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 using ParkManager.Application.Vehicles.Create;
 using ParkManager.Application.Vehicles.Delete;
 using ParkManager.Application.Vehicles.Read;
@@ -27,7 +26,7 @@ namespace ParkManager.Controllers.Vehicles
     {
       var command = new GetAllVehiclesQuery();
       var result = await _sender.Send(command);
-      
+
       if (result.IsFailure)
       {
         return BadRequest(result.Error);

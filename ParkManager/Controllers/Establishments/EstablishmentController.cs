@@ -4,6 +4,7 @@ using ParkManager.Application.Establishments.Create;
 using ParkManager.Application.Establishments.Delete;
 using ParkManager.Application.Establishments.Read;
 using ParkManager.Application.Establishments.Update;
+using ParkManager.Application.Establishments.VehicleEntry;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -126,6 +127,23 @@ namespace ParkManager.Controllers.Establishments
       }
 
       return Ok();
+    }
+
+    [HttpPost("entry")]
+    public async Task<IActionResult> VehicleEntry(
+      [FromBody] VehicleEntryRequest value)
+    {
+      var command = new VehicleEntryCommand(
+        value.EstablishmentId,
+        value.VehicleId
+      );
+
+      var result = await _sender.Send(command);
+      if (result.IsFailure)
+      {
+        return BadRequest(result.Error);
+      }
+      return Ok(result);
     }
   }
 }

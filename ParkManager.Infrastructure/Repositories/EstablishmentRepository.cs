@@ -30,7 +30,8 @@ public class EstablishmentRepository : IEstablishmentRepository
 
   public async Task<Establishment> GetByIdAsync(Guid id, CancellationToken cancellationToken)
   {
-    return await _dbcontext.Set<Establishment>().FirstOrDefaultAsync(e => e.Id == id);
+    return await _dbcontext.Set<Establishment>()
+      .FindAsync(id, cancellationToken);
   }
 
   public async Task<int> GetTotalCarsEntry()

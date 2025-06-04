@@ -7,7 +7,7 @@ Accept: application/json
 ###
 
 ### Get vehicle by ID
-GET {{ParkManager_HostAddress}}/api/vehicles/82f1481b-6f17-4c9b-8cac-93ba5921ad34
+GET {{ParkManager_HostAddress}}/api/vehicles/523c61e0-22be-4b16-8b17-6e7c7b1f51b9
 Accept: application/json
 
 ###
