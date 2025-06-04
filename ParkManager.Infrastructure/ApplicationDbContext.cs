@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using ParkManager.Domain;
 using ParkManager.Domain.Exceptions;
 
 namespace ParkManager.Infrastructure
@@ -7,6 +8,9 @@ namespace ParkManager.Infrastructure
 
   public sealed class ApplicationDbContext : DbContext
   {
+    public DbSet<Establishment> Establishments { get; set; } = null!;
+    public DbSet<Vehicle> Vehicles { get; set; } = null!;
+    public DbSet<ParkingMovement> ParkingMovement { get; set; } = null!;
 
     public ApplicationDbContext(DbContextOptions options) : base(options)
     {
@@ -29,7 +33,7 @@ namespace ParkManager.Infrastructure
 
         return result;
       }
-      catch (DbUpdateConcurrencyException ex)
+      catch (Exception ex)
       {
         throw new ConcurrencyException("Concurrency exception occurred.", ex);
       }

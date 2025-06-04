@@ -31,7 +31,10 @@ public class EstablishmentRepository : IEstablishmentRepository
   public async Task<Establishment> GetByIdAsync(Guid id, CancellationToken cancellationToken)
   {
     return await _dbcontext.Set<Establishment>()
-      .FindAsync(id, cancellationToken);
+      .Include("_parkingMovementList")
+      .AsTracking()
+      .FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
+ 
   }
 
   public async Task<int> GetTotalCarsEntry()
@@ -78,7 +81,9 @@ public class EstablishmentRepository : IEstablishmentRepository
 
   public async Task UpdateAsync(Establishment establishment, CancellationToken cancellationToken)
   {
-    _dbcontext.Set<Establishment>().Update(establishment);
+    var teste = _dbcontext.ChangeTracker.Entries();
+
+    //_dbcontext.Set<Establishment>().Update(establishment);
     await _dbcontext.SaveChangesAsync();
   }
 }
