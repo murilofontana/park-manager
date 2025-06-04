@@ -1,0 +1,48 @@
+@ParkManager_HostAddress = http://localhost:32768
+
+### Get all vehicles
+GET {{ParkManager_HostAddress}}/api/vehicles
+Accept: application/json
+
+###
+
+### Get vehicle by ID
+GET {{ParkManager_HostAddress}}/api/vehicles/82f1481b-6f17-4c9b-8cac-93ba5921ad34
+Accept: application/json
+
+###
+
+### Create a new vehicle
+POST {{ParkManager_HostAddress}}/api/vehicles
+Content-Type: application/json
+Accept: application/json
+{
+  "branch": "Central",
+  "model": "Toyota Corolla",
+  "color": "Blue",
+  "plate": "ABC-1234",
+  "type": 0
+}
+
+###
+
+### Update an existing vehicle
+PUT {{ParkManager_HostAddress}}/api/vehicles/82f1481b-6f17-4c9b-8cac-93ba5921ad34
+Content-Type: application/json
+Accept: application/json
+
+{
+  "branch": "Central",
+  "model": "Toyota Corolla",
+  "color": "Red",
+  "plate": "XYZ-5678",
+  "type": 0
+}
+
+###
+
+### Delete a vehicle
+DELETE {{ParkManager_HostAddress}}/api/vehicles/82f1481b-6f17-4c9b-8cac-93ba5921ad34
+Accept: application/json
+
+###
