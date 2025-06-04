@@ -4,6 +4,7 @@ namespace ParkManager.Application.Establishments.Read;
 
 public class EstablishmentResponse
 {
+  public Guid Id { get; set; }
   public string Name { get; set; }
   public string Cnpj { get; set; }
   public string City { get; set; }
@@ -20,6 +21,7 @@ public class EstablishmentResponse
   {
     return new EstablishmentResponse
     {
+      Id = establishment.Id,
       Name = establishment.Name,
       Cnpj = establishment.Cnpj.Cnpj,
       City = establishment.Address.City,
@@ -39,20 +41,7 @@ public class EstablishmentResponse
     var responses = new List<EstablishmentResponse>();
     foreach (var establishment in establishments)
     {
-      var response = new EstablishmentResponse
-      {
-        Name = establishment.Name,
-        Cnpj = establishment.Cnpj.Cnpj,
-        City = establishment.Address.City,
-        State = establishment.Address.State,
-        Street = establishment.Address.Street,
-        Number = establishment.Address.Number,
-        Complement = establishment.Address.Complement,
-        ZipCode = establishment.Address.ZipCode,
-        Phone = establishment.Phone,
-        MotorcyclesParkingSpaces = establishment.MotorcyclesParkingSpaces,
-        CarsParkingSpaces = establishment.CarsParkingSpaces
-      };
+      var response = FromEntity(establishment);
       responses.Add(response);
     }
     return responses;
