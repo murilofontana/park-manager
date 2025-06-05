@@ -1,4 +1,4 @@
-﻿namespace ParkManager.Application.Establishments.Summary;
+﻿namespace ParkManager.Application.Establishments.Summary.TotalSumary;
 
 public class TotalSummaryResponse
 {

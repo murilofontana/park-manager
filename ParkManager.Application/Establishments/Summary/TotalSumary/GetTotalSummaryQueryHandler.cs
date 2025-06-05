@@ -3,7 +3,7 @@ using ParkManager.Application.Common;
 using ParkManager.Domain;
 using ParkManager.Domain.Abstraction;
 
-namespace ParkManager.Application.Establishments.Summary;
+namespace ParkManager.Application.Establishments.Summary.TotalSumary;
 
 public class GetTotalSummaryQueryHandler : IRequestHandler<GetTotalSummaryQuery, Result<TotalSummaryResponse>>
 {

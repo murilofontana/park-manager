@@ -21,7 +21,7 @@ Accept: application/json
   "model": "Toyota Corolla",
   "color": "Blue",
   "plate": "ABC-1234",
-  "type": 1
+  "type": 0
 }
 
 ###

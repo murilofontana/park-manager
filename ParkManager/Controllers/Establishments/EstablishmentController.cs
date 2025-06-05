@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ParkManager.Application.Establishments.Create;
 using ParkManager.Application.Establishments.Delete;
 using ParkManager.Application.Establishments.Read;
-using ParkManager.Application.Establishments.Summary;
+using ParkManager.Application.Establishments.Summary.TotalSumary;
 using ParkManager.Application.Establishments.Update;
 using ParkManager.Application.Establishments.VehicleEntry;
 using ParkManager.Application.Establishments.VehicleExit;
