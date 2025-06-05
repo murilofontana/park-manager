@@ -1,6 +1,8 @@
-﻿namespace ParkManager.Domain;
+﻿using ParkManager.Domain.Abstraction;
 
-public class Vehicle
+namespace ParkManager.Domain;
+
+public class Vehicle : IAggregateRoot
 {
   private Vehicle()
   {

@@ -1,6 +1,8 @@
-﻿namespace ParkManager.Domain;
+﻿using ParkManager.Domain.Abstraction;
 
-public class Establishment
+namespace ParkManager.Domain;
+
+public class Establishment : IAggregateRoot
 {
   private Establishment()
   {
