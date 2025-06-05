@@ -51,20 +51,6 @@ public class EstablishmentRepository : IEstablishmentRepository
      .CountAsync();
   }
 
-  public async Task<int> GetTotalGeneralEntry(Guid establishmentId)
-  {
-    return await _dbcontext.Set<ParkingMovement>()
-    .Where(e => e.EntryDate != DateTime.MinValue && e.EstablishmentId == establishmentId)
-    .CountAsync();
-  }
-
-  public async Task<int> GetTotalGeneralExit(Guid establishmentId)
-  {
-    return await _dbcontext.Set<ParkingMovement>()
-      .Where(e => e.ExitDate != null && e.EstablishmentId == establishmentId)
-      .CountAsync();
-  }
-
   public async Task<int> GetTotalMotorcyclesEntry(Guid establishmentId)
   {
     return await _dbcontext.Set<ParkingMovement>()

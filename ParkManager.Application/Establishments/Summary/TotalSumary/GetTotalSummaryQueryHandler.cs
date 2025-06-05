@@ -29,8 +29,8 @@ public class GetTotalSummaryQueryHandler : IRequestHandler<GetTotalSummaryQuery,
     var totalMotorcyclesEntry = await _establishmentRepository.GetTotalMotorcyclesEntry(request.EstablishmentId);
     var totalMotorcyclesExit = await _establishmentRepository.GetTotalMotorcyclesExit(request.EstablishmentId);
 
-    var totalGeneralEntry = await _establishmentRepository.GetTotalGeneralEntry(request.EstablishmentId);
-    var totalGeneralExit = await _establishmentRepository.GetTotalGeneralExit(request.EstablishmentId);
+    var totalGeneralEntry = totalCarsEntry + totalMotorcyclesEntry;
+    var totalGeneralExit = totalCarsExit + totalMotorcyclesExit;
 
     var response = new TotalSummaryResponse(
       totalCarsEntry,
