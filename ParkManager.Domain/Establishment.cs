@@ -49,6 +49,9 @@ public class Establishment
     if (vehicle.IsCar() && CarsParkingSpaces <= _parkingMovements.Count(m => m.Type == EVehicleType.Car))
       throw new DomainException(EstablishmentErros.NoAvailableParkingSpacesForCars);
 
+    if (_parkingMovements.Any(m => m.VehicleId == vehicle.Id && m.ExitDate == null))
+      throw new DomainException(EstablishmentErros.VehicleAlreadyParked);
+
     var movement = new ParkingMovement(Id, vehicle.Id, entryDate, null, vehicle.Type);
 
     _parkingMovements.Add(movement);
