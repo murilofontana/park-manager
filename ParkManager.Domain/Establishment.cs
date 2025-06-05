@@ -21,7 +21,6 @@ public class Establishment
     if (motorcyclesParkingSpaces < 0 || carsParkingSpaces < 0)
       throw new DomainException(EstablishmentErros.InvalidParkingSpaces);
 
-    //Id = Id.NewGuid();
     Name = name;
     Cnpj = new CNPJ(cnpj);
     Address = new Address(city, state, street, number, complement, zipCode);

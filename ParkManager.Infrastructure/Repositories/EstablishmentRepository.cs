@@ -83,7 +83,7 @@ public class EstablishmentRepository : IEstablishmentRepository
   {
     var teste = _dbcontext.ChangeTracker.Entries();
 
-    //_dbcontext.Set<Establishment>().Update(establishment);
+    _dbcontext.Set<Establishment>().Update(establishment);
     await _dbcontext.SaveChangesAsync();
   }
 }

@@ -4,36 +4,35 @@ using ParkManager.Domain;
 
 namespace ParkManager.Infrastructure.Configurations
 {
-    public class VehicleConfiguration : IEntityTypeConfiguration<Vehicle>
+  public class VehicleConfiguration : IEntityTypeConfiguration<Vehicle>
+  {
+    public void Configure(EntityTypeBuilder<Vehicle> builder)
     {
-        public void Configure(EntityTypeBuilder<Vehicle> builder)
-        {
-            builder.ToTable("Vehicles");
+      builder.ToTable("Vehicles");
 
-            builder.HasKey(v => v.Id);
+      builder.HasKey(v => v.Id);
 
-            builder.Property(v => v.Branch)
+      builder.Property(pm => pm.Id)
+      .ValueGeneratedOnAdd();
+
+      builder.Property(v => v.Branch)
                 .IsRequired()
                 .HasMaxLength(100);
 
-            builder.Property(v => v.Model)
-                .IsRequired()
-                .HasMaxLength(100);
+      builder.Property(v => v.Model)
+          .IsRequired()
+          .HasMaxLength(100);
 
-            builder.Property(v => v.Color)
-                .IsRequired()
-                .HasMaxLength(50);
+      builder.Property(v => v.Color)
+          .IsRequired()
+          .HasMaxLength(50);
 
-            builder.Property(v => v.Plate)
-                .IsRequired()
-                .HasMaxLength(20);
+      builder.Property(v => v.Plate)
+          .IsRequired()
+          .HasMaxLength(20);
 
-            builder.Property(v => v.Type)
-                .IsRequired();
-
-            // Ignore methods
-            //builder.Ignore(v => v.IsMotorcycle);
-            //builder.Ignore(v => v.IsCar);
-        }
+      builder.Property(v => v.Type)
+          .IsRequired();
     }
+  }
 }

@@ -8,7 +8,6 @@ public class Vehicle
   }
   public Vehicle(string branch, string model, string color, string plate, EVehicleType type)
   {
-    Id = Guid.NewGuid();
     Branch = branch;
     Model = model;
     Color = color;

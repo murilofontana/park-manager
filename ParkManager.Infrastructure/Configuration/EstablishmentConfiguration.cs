@@ -12,6 +12,9 @@ public class EstablishmentConfiguration : IEntityTypeConfiguration<Establishment
 
     builder.HasKey(e => e.Id);
 
+    builder.Property(pm => pm.Id)
+      .ValueGeneratedOnAdd();
+
     builder.Property(e => e.Name)
         .IsRequired()
         .HasMaxLength(200);

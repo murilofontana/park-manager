@@ -7,7 +7,6 @@ public class ParkingMovement
   }
   public ParkingMovement(Guid establishmentId, Guid vehicleId, DateTime entryDate, DateTime? exitDate, EVehicleType type)
   {
-    Id = Guid.NewGuid();
     EstablishmentId = establishmentId;
     VehicleId = vehicleId;
     EntryDate = entryDate;

@@ -11,6 +11,9 @@ public class ParkingMovementConfiguration : IEntityTypeConfiguration<ParkingMove
     builder.ToTable("ParkingMovements");
     builder.HasKey(pm => pm.Id);
 
+    builder.Property(pm => pm.Id)
+      .ValueGeneratedOnAdd();
+
     builder.Property(pm => pm.EntryDate)
         .IsRequired();
 
