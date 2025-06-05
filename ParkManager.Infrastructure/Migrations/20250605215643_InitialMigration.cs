@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ParkManager.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -54,12 +54,11 @@ namespace ParkManager.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    ParkingId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    EstablishmentId = table.Column<Guid>(type: "TEXT", nullable: false),
                     VehicleId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Type = table.Column<int>(type: "INTEGER", nullable: false),
                     EntryDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ExitDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    EstablishmentId = table.Column<Guid>(type: "TEXT", nullable: false)
+                    ExitDate = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

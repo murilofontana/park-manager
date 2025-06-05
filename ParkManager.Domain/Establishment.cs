@@ -21,7 +21,7 @@ public class Establishment
     if (motorcyclesParkingSpaces < 0 || carsParkingSpaces < 0)
       throw new DomainException(EstablishmentErros.InvalidParkingSpaces);
 
-    //Id = Guid.NewGuid();
+    //Id = Id.NewGuid();
     Name = name;
     Cnpj = new CNPJ(cnpj);
     Address = new Address(city, state, street, number, complement, zipCode);
@@ -37,27 +37,26 @@ public class Establishment
   public string Phone { get; private set; }
   public int MotorcyclesParkingSpaces { get; private set; }
   public int CarsParkingSpaces { get; private set; }
+  public List<ParkingMovement> ParkingMovementList { get; private set; }  = [];
 
-  private List<ParkingMovement> _parkingMovementList = [];
-
-  public IReadOnlyList<ParkingMovement> GetParkingMovements() => _parkingMovementList.AsReadOnly();
+  public IReadOnlyList<ParkingMovement> GetParkingMovements() => ParkingMovementList.AsReadOnly();
 
   public void Entry(Vehicle vehicle, DateTime entryDate)
   {
-    if (vehicle.IsMotorcycle() && MotorcyclesParkingSpaces <= _parkingMovementList.Count(m => m.Type == EVehicleType.Motorcycle))
+    if (vehicle.IsMotorcycle() && MotorcyclesParkingSpaces <= ParkingMovementList.Count(m => m.Type == EVehicleType.Motorcycle))
       throw new DomainException(EstablishmentErros.NoAvailableParkingSpacesForMotorcycles);
 
-    if (vehicle.IsCar() && CarsParkingSpaces <= _parkingMovementList.Count(m => m.Type == EVehicleType.Car))
+    if (vehicle.IsCar() && CarsParkingSpaces <= ParkingMovementList.Count(m => m.Type == EVehicleType.Car))
       throw new DomainException(EstablishmentErros.NoAvailableParkingSpacesForCars);
 
     var movement = new ParkingMovement(Id, vehicle.Id, entryDate, null, vehicle.Type);
 
-    _parkingMovementList.Add(movement);
+    ParkingMovementList.Add(movement);
   }
 
   public void Exit(Guid vehicleId, DateTime exitDate)
   {
-    var movement = _parkingMovementList.FirstOrDefault(m => m.VehicleId == vehicleId && m.ExitDate == null);
+    var movement = ParkingMovementList.FirstOrDefault(m => m.VehicleId == vehicleId && m.ExitDate == null);
 
     if (movement == null)
       throw new DomainException(EstablishmentErros.VehicleNotFoundOrAlreadyExited);
@@ -90,36 +89,6 @@ public class Establishment
   }
 
 }
-
-public class ParkingMovement
-{
-  public ParkingMovement(Guid parkingId, Guid vehicleId, DateTime entryDate, DateTime? exitDate, EVehicleType type)
-  {
-    Guid = Guid.NewGuid();
-    ParkingId = parkingId;
-    VehicleId = vehicleId;
-    EntryDate = entryDate;
-    ExitDate = exitDate;
-    Type = type;
-  }
-
-  public Guid Guid { get; }
-  public Guid ParkingId { get; }
-  public Guid VehicleId { get; }
-  public EVehicleType Type { get; }
-  public DateTime EntryDate { get; }
-  public DateTime? ExitDate { get; set; }
-
-  public void Exit(DateTime exitDate)
-  {
-    if (ExitDate.HasValue)
-      throw new DomainException("The vehicle has already exited.");
-
-    ExitDate = exitDate;
-  }
-}
-
-
 public record Address
 {
   public Address(string city, string state, string street, string number, string complement, string zipCode)

@@ -66,32 +66,12 @@ public class EstablishmentConfiguration : IEntityTypeConfiguration<Establishment
     builder.Property(e => e.CarsParkingSpaces)
         .IsRequired();
 
-    //builder.Ignore(e => e.GetParkingMovements());
+    builder.HasMany(e => e.ParkingMovementList)
+    .WithOne()
+    .HasForeignKey("EstablishmentId")
+    .IsRequired()
+    .OnDelete(DeleteBehavior.Cascade);
 
-    builder.OwnsMany<ParkingMovement>("_parkingMovementList", pm =>
-    {
-      pm.ToTable("ParkingMovements");
-      pm.WithOwner().HasForeignKey("EstablishmentId");
-
-      pm.HasKey(p => p.Guid);
-
-      pm.Property(p => p.Guid)
-                  .HasColumnName("Id")
-                  .IsRequired();
-
-      pm.Property(p => p.ParkingId)
-                  .IsRequired();
-
-      pm.Property(p => p.VehicleId)
-                  .IsRequired();
-
-      pm.Property(p => p.Type)
-                  .IsRequired();
-
-      pm.Property(p => p.EntryDate)
-                  .IsRequired();
-
-      pm.Property(p => p.ExitDate);
-    });
+    //builder.Navigation("_parkingMovementList").UsePropertyAccessMode(PropertyAccessMode.Field);
   }
 }

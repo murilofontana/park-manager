@@ -44,6 +44,34 @@ namespace ParkManager.Infrastructure.Migrations
                     b.ToTable("Establishments", (string)null);
                 });
 
+            modelBuilder.Entity("ParkManager.Domain.ParkingMovement", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("EntryDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("EstablishmentId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("ExitDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("VehicleId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EstablishmentId");
+
+                    b.ToTable("ParkingMovements", (string)null);
+                });
+
             modelBuilder.Entity("ParkManager.Domain.Vehicle", b =>
                 {
                     b.Property<Guid>("Id")
@@ -148,47 +176,24 @@ namespace ParkManager.Infrastructure.Migrations
                                 .HasForeignKey("EstablishmentId");
                         });
 
-                    b.OwnsMany("ParkManager.Domain.ParkingMovement", "_parkingMovementList", b1 =>
-                        {
-                            b1.Property<Guid>("Guid")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("TEXT")
-                                .HasColumnName("Id");
-
-                            b1.Property<DateTime>("EntryDate")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<Guid>("EstablishmentId")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<DateTime?>("ExitDate")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<Guid>("ParkingId")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<int>("Type")
-                                .HasColumnType("INTEGER");
-
-                            b1.Property<Guid>("VehicleId")
-                                .HasColumnType("TEXT");
-
-                            b1.HasKey("Guid");
-
-                            b1.HasIndex("EstablishmentId");
-
-                            b1.ToTable("ParkingMovements", (string)null);
-
-                            b1.WithOwner()
-                                .HasForeignKey("EstablishmentId");
-                        });
-
                     b.Navigation("Address")
                         .IsRequired();
 
                     b.Navigation("Cnpj")
                         .IsRequired();
+                });
 
+            modelBuilder.Entity("ParkManager.Domain.ParkingMovement", b =>
+                {
+                    b.HasOne("ParkManager.Domain.Establishment", null)
+                        .WithMany("_parkingMovementList")
+                        .HasForeignKey("EstablishmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ParkManager.Domain.Establishment", b =>
+                {
                     b.Navigation("_parkingMovementList");
                 });
 #pragma warning restore 612, 618

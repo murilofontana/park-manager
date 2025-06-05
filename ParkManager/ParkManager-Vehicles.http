@@ -1,4 +1,4 @@
-@ParkManager_HostAddress = http://localhost:32768
+@ParkManager_HostAddress = http://localhost:32770
 
 ### Get all vehicles
 GET {{ParkManager_HostAddress}}/api/vehicles
