@@ -76,3 +76,10 @@ Accept: application/json
   "establishmentId": "789de395-f8cc-4ac8-9288-2301f817e35e",
   "vehicleId": "f39c3a2c-b128-4b03-8fef-d3411788eb89"
 }
+
+
+### Get establishment report
+GET {{ParkManager_HostAddress}}/api/establishment/789de395-f8cc-4ac8-9288-2301f817e35e/total-summary
+Accept: application/json
+
+###

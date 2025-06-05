@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ParkManager.Application.Establishments.Create;
 using ParkManager.Application.Establishments.Delete;
 using ParkManager.Application.Establishments.Read;
+using ParkManager.Application.Establishments.Summary;
 using ParkManager.Application.Establishments.Update;
 using ParkManager.Application.Establishments.VehicleEntry;
 using ParkManager.Application.Establishments.VehicleExit;
@@ -160,6 +161,21 @@ namespace ParkManager.Controllers.Establishments
         return BadRequest(result.Error);
       }
       return Ok(result);
+    }
+
+    [HttpGet("{Id}/total-summary")]
+    public async Task<IActionResult> GetTotalSummary(Guid id)
+    {
+      var command = new GetTotalSummaryQuery(id);
+
+      var result = await _sender.Send(command);
+
+      if (result.IsFailure)
+      {
+        return BadRequest(result.Error);
+      }
+
+      return Ok(result.Value);
     }
   }
 }

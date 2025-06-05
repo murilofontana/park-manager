@@ -37,45 +37,45 @@ public class EstablishmentRepository : IEstablishmentRepository
  
   }
 
-  public async Task<int> GetTotalCarsEntry()
+  public async Task<int> GetTotalCarsEntry(Guid establishmentId)
   {
     return await _dbcontext.Set<ParkingMovement>()
-      .Where(e => e.Type == EVehicleType.Car && e.EntryDate != DateTime.MinValue)
+      .Where(e => e.Type == EVehicleType.Car && e.EntryDate != DateTime.MinValue && e.EstablishmentId == establishmentId)
       .CountAsync();
   }
 
-  public async Task<int> GetTotalCarsExit()
+  public async Task<int> GetTotalCarsExit(Guid establishmentId)
   {
     return await _dbcontext.Set<ParkingMovement>()
-     .Where(e => e.Type == EVehicleType.Car && e.ExitDate != DateTime.MinValue)
+     .Where(e => e.Type == EVehicleType.Car && e.ExitDate != DateTime.MinValue && e.EstablishmentId == establishmentId)
      .CountAsync();
   }
 
-  public async Task<int> GetTotalGeneralEntry()
+  public async Task<int> GetTotalGeneralEntry(Guid establishmentId)
   {
     return await _dbcontext.Set<ParkingMovement>()
-    .Where(e => e.EntryDate != DateTime.MinValue)
+    .Where(e => e.EntryDate != DateTime.MinValue && e.EstablishmentId == establishmentId)
     .CountAsync();
   }
 
-  public async Task<int> GetTotalGeneralExit()
+  public async Task<int> GetTotalGeneralExit(Guid establishmentId)
   {
     return await _dbcontext.Set<ParkingMovement>()
-      .Where(e => e.Type == EVehicleType.Car && e.ExitDate != DateTime.MinValue)
+      .Where(e => e.Type == EVehicleType.Car && e.ExitDate != DateTime.MinValue && e.EstablishmentId == establishmentId)
       .CountAsync();
   }
 
-  public async Task<int> GetTotalMotorcyclesEntry()
+  public async Task<int> GetTotalMotorcyclesEntry(Guid establishmentId)
   {
     return await _dbcontext.Set<ParkingMovement>()
-     .Where(e => e.Type == EVehicleType.Motorcycle && e.EntryDate != DateTime.MinValue)
+     .Where(e => e.Type == EVehicleType.Motorcycle && e.EntryDate != DateTime.MinValue && e.EstablishmentId == establishmentId)
      .CountAsync();
   }
 
-  public async Task<int> GetTotalMotorcyclesExit()
+  public async Task<int> GetTotalMotorcyclesExit(Guid establishmentId)
   {
     return await _dbcontext.Set<ParkingMovement>()
-    .Where(e => e.Type == EVehicleType.Motorcycle && e.ExitDate != DateTime.MinValue)
+    .Where(e => e.Type == EVehicleType.Motorcycle && e.ExitDate != DateTime.MinValue && e.EstablishmentId == establishmentId)
     .CountAsync();
   }
 
