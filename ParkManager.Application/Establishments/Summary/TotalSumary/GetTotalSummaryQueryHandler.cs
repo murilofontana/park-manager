@@ -7,30 +7,30 @@ namespace ParkManager.Application.Establishments.Summary.TotalSumary;
 
 public class GetTotalSummaryQueryHandler : IRequestHandler<GetTotalSummaryQuery, Result<TotalSummaryResponse>>
 {
-  private readonly IEstablishmentRepository _repository;
+  private readonly IEstablishmentRepository _establishmentRepository;
 
   public GetTotalSummaryQueryHandler(IEstablishmentRepository repository)
   {
-    _repository = repository;
+    _establishmentRepository = repository;
   }
 
   public async Task<Result<TotalSummaryResponse>> Handle(GetTotalSummaryQuery request, CancellationToken cancellationToken)
   {
 
-    var establishment = await _repository.GetByIdAsync(request.EstablishmentId, cancellationToken);
+    var establishment = await _establishmentRepository.GetByIdAsync(request.EstablishmentId, cancellationToken);
     if (establishment == null)
     {
       return Result.Failure<TotalSummaryResponse>(new Error("999", "Establishment not found!"));
     }
 
-    var totalCarsEntry = await _repository.GetTotalCarsEntry(request.EstablishmentId);
-    var totalCarsExit = await _repository.GetTotalCarsExit(request.EstablishmentId);
+    var totalCarsEntry = await _establishmentRepository.GetTotalCarsEntry(request.EstablishmentId);
+    var totalCarsExit = await _establishmentRepository.GetTotalCarsExit(request.EstablishmentId);
 
-    var totalMotorcyclesEntry = await _repository.GetTotalMotorcyclesEntry(request.EstablishmentId);
-    var totalMotorcyclesExit = await _repository.GetTotalMotorcyclesExit(request.EstablishmentId);
+    var totalMotorcyclesEntry = await _establishmentRepository.GetTotalMotorcyclesEntry(request.EstablishmentId);
+    var totalMotorcyclesExit = await _establishmentRepository.GetTotalMotorcyclesExit(request.EstablishmentId);
 
-    var totalGeneralEntry = await _repository.GetTotalGeneralEntry(request.EstablishmentId);
-    var totalGeneralExit = await _repository.GetTotalGeneralExit(request.EstablishmentId);
+    var totalGeneralEntry = await _establishmentRepository.GetTotalGeneralEntry(request.EstablishmentId);
+    var totalGeneralExit = await _establishmentRepository.GetTotalGeneralExit(request.EstablishmentId);
 
     var response = new TotalSummaryResponse(
       totalCarsEntry,
