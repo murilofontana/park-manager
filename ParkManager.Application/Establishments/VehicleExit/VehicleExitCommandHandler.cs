@@ -1,21 +1,22 @@
 ﻿using MediatR;
 using ParkManager.Application.Common;
+using ParkManager.Application.Establishments.VehicleExit;
 using ParkManager.Domain.Abstraction;
 
-namespace ParkManager.Application.Establishments.VehicleEntry;
+namespace ParkManager.Application.Establishments.VehicleExot;
 
-public class VehicleEntryCommandHandler : IRequestHandler<VehicleEntryCommand, Result>
+public class VehicleExitCommandHandler : IRequestHandler<VehicleExitCommand, Result>
 {
   private readonly IEstablishmentRepository _establishmentRepository;
   private readonly IVehicleRepository _vehicleRepository;
 
-  public VehicleEntryCommandHandler(IEstablishmentRepository repository, IVehicleRepository vehicleRepository)
+  public VehicleExitCommandHandler(IEstablishmentRepository repository, IVehicleRepository vehicleRepository)
   {
     _establishmentRepository = repository;
     _vehicleRepository = vehicleRepository;
   }
 
-  public async Task<Result> Handle(VehicleEntryCommand request, CancellationToken cancellationToken)
+  public async Task<Result> Handle(VehicleExitCommand request, CancellationToken cancellationToken)
   {
     var establishment = await _establishmentRepository.GetByIdAsync(request.EstablishmentId, cancellationToken);
 
@@ -31,7 +32,7 @@ public class VehicleEntryCommandHandler : IRequestHandler<VehicleEntryCommand, R
       return Result.Failure(new Error("VehicleNotFound", "The specified vehicle was not found."));
     }
 
-    establishment.Entry(vehicle, DateTime.Now);
+    establishment.Exit(vehicle.Id, DateTime.Now);
 
     await _establishmentRepository.UpdateAsync(establishment, cancellationToken);
 

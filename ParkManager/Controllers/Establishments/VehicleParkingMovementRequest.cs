@@ -1,10 +1,10 @@
 ﻿namespace ParkManager.Controllers.Establishments
 {
-  public class VehicleEntryRequest
+  public class VehicleParkingMovementRequest
   {
     public Guid EstablishmentId { get; set; }
     public Guid VehicleId { get; set; }
-    public VehicleEntryRequest(Guid establishmentId, Guid vehicleId)
+    public VehicleParkingMovementRequest(Guid establishmentId, Guid vehicleId)
     {
       EstablishmentId = establishmentId;
       VehicleId = vehicleId;

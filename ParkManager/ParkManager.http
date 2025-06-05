@@ -64,6 +64,15 @@ POST {{ParkManager_HostAddress}}/api/establishment/entry
 Content-Type: application/json
 Accept: application/json
 {
-  "establishmentId": "37567f9e-11b8-4264-9134-1661d16529b9",
-  "vehicleId": "f4567c74-4cf0-4686-bfc2-3a79b007fec0"
+  "establishmentId": "789de395-f8cc-4ac8-9288-2301f817e35e",
+  "vehicleId": "f39c3a2c-b128-4b03-8fef-d3411788eb89"
+}
+
+  ### Exit A Vehicle
+POST {{ParkManager_HostAddress}}/api/establishment/exit
+Content-Type: application/json
+Accept: application/json
+{
+  "establishmentId": "789de395-f8cc-4ac8-9288-2301f817e35e",
+  "vehicleId": "f39c3a2c-b128-4b03-8fef-d3411788eb89"
 }
