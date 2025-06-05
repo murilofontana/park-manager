@@ -36,26 +36,27 @@ public class Establishment
   public string Phone { get; private set; }
   public int MotorcyclesParkingSpaces { get; private set; }
   public int CarsParkingSpaces { get; private set; }
-  public List<ParkingMovement> ParkingMovementList { get; private set; }  = [];
 
-  public IReadOnlyList<ParkingMovement> GetParkingMovements() => ParkingMovementList.AsReadOnly();
+  private List<ParkingMovement> _parkingMovements = [];
+
+  public IReadOnlyList<ParkingMovement> GetParkingMovements() => _parkingMovements.AsReadOnly();
 
   public void Entry(Vehicle vehicle, DateTime entryDate)
   {
-    if (vehicle.IsMotorcycle() && MotorcyclesParkingSpaces <= ParkingMovementList.Count(m => m.Type == EVehicleType.Motorcycle))
+    if (vehicle.IsMotorcycle() && MotorcyclesParkingSpaces <= _parkingMovements.Count(m => m.Type == EVehicleType.Motorcycle))
       throw new DomainException(EstablishmentErros.NoAvailableParkingSpacesForMotorcycles);
 
-    if (vehicle.IsCar() && CarsParkingSpaces <= ParkingMovementList.Count(m => m.Type == EVehicleType.Car))
+    if (vehicle.IsCar() && CarsParkingSpaces <= _parkingMovements.Count(m => m.Type == EVehicleType.Car))
       throw new DomainException(EstablishmentErros.NoAvailableParkingSpacesForCars);
 
     var movement = new ParkingMovement(Id, vehicle.Id, entryDate, null, vehicle.Type);
 
-    ParkingMovementList.Add(movement);
+    _parkingMovements.Add(movement);
   }
 
   public void Exit(Guid vehicleId, DateTime exitDate)
   {
-    var movement = ParkingMovementList.FirstOrDefault(m => m.VehicleId == vehicleId && m.ExitDate == null);
+    var movement = _parkingMovements.FirstOrDefault(m => m.VehicleId == vehicleId && m.ExitDate == null);
 
     if (movement == null)
       throw new DomainException(EstablishmentErros.VehicleNotFoundOrAlreadyExited);

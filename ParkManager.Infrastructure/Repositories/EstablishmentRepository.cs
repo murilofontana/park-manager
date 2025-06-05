@@ -31,7 +31,7 @@ public class EstablishmentRepository : IEstablishmentRepository
   public async Task<Establishment> GetByIdAsync(Guid id, CancellationToken cancellationToken)
   {
     return await _dbcontext.Set<Establishment>()
-      .Include(e => e.ParkingMovementList)
+      .Include("_parkingMovements")
       .AsTracking()
       .FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
  

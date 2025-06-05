@@ -69,12 +69,10 @@ public class EstablishmentConfiguration : IEntityTypeConfiguration<Establishment
     builder.Property(e => e.CarsParkingSpaces)
         .IsRequired();
 
-    builder.HasMany(e => e.ParkingMovementList)
+    builder.HasMany<ParkingMovement>("_parkingMovements")
     .WithOne()
     .HasForeignKey("EstablishmentId")
     .IsRequired()
     .OnDelete(DeleteBehavior.Cascade);
-
-    //builder.Navigation("_parkingMovementList").UsePropertyAccessMode(PropertyAccessMode.Field);
   }
 }
