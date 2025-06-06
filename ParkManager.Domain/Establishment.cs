@@ -45,10 +45,10 @@ public class Establishment : IAggregateRoot
 
   public void Entry(Vehicle vehicle, DateTime entryDate)
   {
-    if (vehicle.IsMotorcycle() && MotorcyclesParkingSpaces <= _parkingMovements.Count(m => m.Type == EVehicleType.Motorcycle))
+    if (vehicle.IsMotorcycle() && MotorcyclesParkingSpaces <= _parkingMovements.Where(t => t.ExitDate == null).Count(m => m.Type == EVehicleType.Motorcycle))
       throw new DomainException(EstablishmentErros.NoAvailableParkingSpacesForMotorcycles);
 
-    if (vehicle.IsCar() && CarsParkingSpaces <= _parkingMovements.Count(m => m.Type == EVehicleType.Car))
+    if (vehicle.IsCar() && CarsParkingSpaces <= _parkingMovements.Where(t => t.ExitDate == null).Count(m => m.Type == EVehicleType.Car))
       throw new DomainException(EstablishmentErros.NoAvailableParkingSpacesForCars);
 
     if (_parkingMovements.Any(m => m.VehicleId == vehicle.Id && m.ExitDate == null))

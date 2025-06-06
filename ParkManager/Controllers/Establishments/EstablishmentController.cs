@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ParkManager.Application.Establishments.Create;
 using ParkManager.Application.Establishments.Delete;
 using ParkManager.Application.Establishments.Read;
+using ParkManager.Application.Establishments.Summary.DailySummaryGroupedByHour;
 using ParkManager.Application.Establishments.Summary.TotalSumary;
 using ParkManager.Application.Establishments.Update;
 using ParkManager.Application.Establishments.VehicleEntry;
@@ -167,6 +168,21 @@ namespace ParkManager.Controllers.Establishments
     public async Task<IActionResult> GetTotalSummary(Guid id)
     {
       var command = new GetTotalSummaryQuery(id);
+
+      var result = await _sender.Send(command);
+
+      if (result.IsFailure)
+      {
+        return BadRequest(result.Error);
+      }
+
+      return Ok(result.Value);
+    }
+
+    [HttpGet("{Id}/daily-summary/{Date}")]
+    public async Task<IActionResult> GetDailySummary(Guid id, DateOnly date)
+    {
+      var command = new GetDailySummaryGroupByHourQuery(id, date);
 
       var result = await _sender.Send(command);
 

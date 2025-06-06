@@ -65,7 +65,7 @@ Content-Type: application/json
 Accept: application/json
 {
   "establishmentId": "789de395-f8cc-4ac8-9288-2301f817e35e",
-  "vehicleId": "662df0e7-e214-44b3-ad26-92fb0657bc38"
+  "vehicleId": "2d0c90a7-a4fe-4255-85fa-f3188e01b4ab"
 }
 
   ### Exit A Vehicle
@@ -74,12 +74,19 @@ Content-Type: application/json
 Accept: application/json
 {
   "establishmentId": "789de395-f8cc-4ac8-9288-2301f817e35e",
-  "vehicleId": "662df0e7-e214-44b3-ad26-92fb0657bc38"
+  "vehicleId": "2d0c90a7-a4fe-4255-85fa-f3188e01b4ab"
 }
 
 
 ### Get establishment report
 GET {{ParkManager_HostAddress}}/api/establishment/789de395-f8cc-4ac8-9288-2301f817e35e/total-summary
+Accept: application/json
+
+###
+
+  
+  ### Get establishment daily report
+GET {{ParkManager_HostAddress}}/api/establishment/789de395-f8cc-4ac8-9288-2301f817e35e/daily-summary/2025-06-05
 Accept: application/json
 
 ###
