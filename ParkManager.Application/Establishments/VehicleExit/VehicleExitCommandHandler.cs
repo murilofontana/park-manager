@@ -3,7 +3,7 @@ using ParkManager.Application.Common;
 using ParkManager.Application.Establishments.VehicleExit;
 using ParkManager.Domain.Abstraction;
 
-namespace ParkManager.Application.Establishments.VehicleExot;
+namespace ParkManager.Application.Establishments.VehicleExit;
 
 public class VehicleExitCommandHandler : IRequestHandler<VehicleExitCommand, Result>
 {
