@@ -2,7 +2,7 @@
 
 namespace ParkManager.Domain;
 
-public class Establishment : IAggregateRoot
+public class Establishment : AggregateRoot
 {
   private Establishment()
   {

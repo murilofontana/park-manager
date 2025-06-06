@@ -2,7 +2,7 @@
 
 namespace ParkManager.Domain;
 
-public class Vehicle : IAggregateRoot
+public class Vehicle : AggregateRoot
 {
   private Vehicle()
   {

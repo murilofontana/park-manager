@@ -5,28 +5,12 @@ using ParkManager.Domain;
 
 namespace ParkManager.Infrastructure.Repositories;
 
-public class EstablishmentRepository : IEstablishmentRepository
+public class EstablishmentRepository : RepositoryBase<Establishment>, IEstablishmentRepository
 {
   private readonly ApplicationDbContext _dbcontext;
-  public EstablishmentRepository(ApplicationDbContext dbContext)
+  public EstablishmentRepository(ApplicationDbContext dbContext) : base(dbContext)
   {
     _dbcontext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
-  }
-  public async Task AddAsync(Establishment establishment, CancellationToken cancellationToken)
-  {
-    await _dbcontext.Set<Establishment>().AddAsync(establishment, cancellationToken);
-    await _dbcontext.SaveChangesAsync();
-  }
-
-  public async Task DeleteAsync(Establishment establishment, CancellationToken cancellationToken)
-  {
-    _dbcontext.Set<Establishment>().Remove(establishment);
-    await _dbcontext.SaveChangesAsync();
-  }
-
-  public async Task<IEnumerable<Establishment>> GetByAllAsync(CancellationToken cancellationToken)
-  {
-    return await _dbcontext.Set<Establishment>().ToListAsync(cancellationToken);
   }
 
   public async Task<Establishment> GetByIdAsync(Guid id, CancellationToken cancellationToken)
@@ -35,7 +19,6 @@ public class EstablishmentRepository : IEstablishmentRepository
       .Include("_parkingMovements")
       .AsTracking()
       .FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
-
   }
 
   public async Task<IEnumerable<HourSummaryResponse>> GetDailySummaryGroupedByHourAsync(Guid establishmentId, DateOnly date, CancellationToken cancellationToken)
@@ -108,13 +91,5 @@ public class EstablishmentRepository : IEstablishmentRepository
     return await _dbcontext.Set<ParkingMovement>()
     .Where(e => e.Type == EVehicleType.Motorcycle && e.ExitDate != null && e.EstablishmentId == establishmentId)
     .CountAsync();
-  }
-
-  public async Task UpdateAsync(Establishment establishment, CancellationToken cancellationToken)
-  {
-    var teste = _dbcontext.ChangeTracker.Entries();
-
-    _dbcontext.Set<Establishment>().Update(establishment);
-    await _dbcontext.SaveChangesAsync();
   }
 }

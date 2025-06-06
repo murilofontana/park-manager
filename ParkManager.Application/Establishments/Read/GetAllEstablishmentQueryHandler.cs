@@ -13,7 +13,7 @@ public class GetAllEstablishmentQueryHandler : IRequestHandler<GetAllEstablishme
   }
   public async Task<Result<List<EstablishmentResponse>>> Handle(GetAllEstablishmentsQuery request, CancellationToken cancellationToken)
   {
-    var establishments = await _repository.GetByAllAsync(cancellationToken);
+    var establishments = await _repository.GetAllAsync(cancellationToken);
     if (!establishments.Any())
     {
       return Result.Failure<List<EstablishmentResponse>>(new Error("999", "There is no Establishment"));

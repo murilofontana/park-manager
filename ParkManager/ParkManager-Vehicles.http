@@ -1,4 +1,4 @@
-@ParkManager_HostAddress = http://localhost:32770
+@ParkManager_HostAddress = http://localhost:32772
 
 ### Get all vehicles
 GET {{ParkManager_HostAddress}}/api/vehicles
@@ -7,7 +7,7 @@ Accept: application/json
 ###
 
 ### Get vehicle by ID
-GET {{ParkManager_HostAddress}}/api/vehicles/523c61e0-22be-4b16-8b17-6e7c7b1f51b9
+GET {{ParkManager_HostAddress}}/api/vehicles/37d4f2ee-7145-431a-9817-92fb5af29658
 Accept: application/json
 
 ###
@@ -27,12 +27,12 @@ Accept: application/json
 ###
 
 ### Update an existing vehicle
-PUT {{ParkManager_HostAddress}}/api/vehicles/82f1481b-6f17-4c9b-8cac-93ba5921ad34
+PUT {{ParkManager_HostAddress}}/api/vehicles/37d4f2ee-7145-431a-9817-92fb5af29658
 Content-Type: application/json
 Accept: application/json
 
 {
-  "branch": "Central",
+  "branch": "Centaaaaral",
   "model": "Toyota Corolla",
   "color": "Red",
   "plate": "XYZ-5678",
@@ -42,7 +42,7 @@ Accept: application/json
 ###
 
 ### Delete a vehicle
-DELETE {{ParkManager_HostAddress}}/api/vehicles/82f1481b-6f17-4c9b-8cac-93ba5921ad34
+DELETE {{ParkManager_HostAddress}}/api/vehicles/37d4f2ee-7145-431a-9817-92fb5af29658
 Accept: application/json
 
 ###

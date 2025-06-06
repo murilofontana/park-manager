@@ -1,4 +1,4 @@
-@ParkManager_HostAddress = http://localhost:32770
+@ParkManager_HostAddress = http://localhost:32772
 
 ### Get all establishments
 GET {{ParkManager_HostAddress}}/api/establishment
@@ -7,7 +7,7 @@ Accept: application/json
 ###
 
 ### Get establishment by ID
-GET {{ParkManager_HostAddress}}/api/establishment/1f74068d-6503-4b1b-a99a-77f89a91170e
+GET {{ParkManager_HostAddress}}/api/establishment/789de395-f8cc-4ac8-9288-2301f817e35e
 Accept: application/json
 
 ###
@@ -33,7 +33,7 @@ Accept: application/json
 ###
 
 ### Update an existing establishment
-PUT {{ParkManager_HostAddress}}/api/establishment/1f74068d-6503-4b1b-a99a-77f89a91170e
+PUT {{ParkManager_HostAddress}}/api/establishment/f043b410-c9e8-434f-9aba-299cf98126e3
 Content-Type: application/json
 Accept: application/json
 
@@ -48,13 +48,13 @@ Accept: application/json
   "zipCode": "37950000",
   "phone": "555881284",
   "motorcyclesParkingSpaces": 3,
-  "carsParkingSpaces": 10
+  "carsParkingSpaces": 15
 }
 
 ###
 
 ### Delete an establishment
-DELETE {{ParkManager_HostAddress}}/api/establishment/4a4e2fd4-d113-4a6a-9b50-8158318f5c3f
+DELETE {{ParkManager_HostAddress}}/api/establishment/f043b410-c9e8-434f-9aba-299cf98126e3
 Accept: application/json
 
 ###
