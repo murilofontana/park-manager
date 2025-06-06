@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using ParkManager.Application.Common;
-using ParkManager.Application.Establishments.VehicleExit;
 using ParkManager.Domain.Abstraction;
 
 namespace ParkManager.Application.Establishments.VehicleExit;
