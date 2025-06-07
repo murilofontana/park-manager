@@ -28,10 +28,10 @@ public class Vehicle : AggregateRoot
 
   public void Update(string branch, string model, string color, string plate, EVehicleType type)
   {
-    if (string.IsNullOrWhiteSpace(branch)) throw new DomainException("Branch cannot be empty");
-    if (string.IsNullOrWhiteSpace(model)) throw new DomainException("Model cannot be empty");
-    if (string.IsNullOrWhiteSpace(color)) throw new DomainException("Color cannot be empty");
-    if (string.IsNullOrWhiteSpace(plate)) throw new DomainException("Plate cannot be empty");
+    if (string.IsNullOrWhiteSpace(branch)) throw new DomainException(VehicleError.BranchCannotBeEmpty);
+    if (string.IsNullOrWhiteSpace(model)) throw new DomainException(VehicleError.ModelCannotBeEmpty);
+    if (string.IsNullOrWhiteSpace(color)) throw new DomainException(VehicleError.ColorCannotBeEmpty);
+    if (string.IsNullOrWhiteSpace(plate)) throw new DomainException(VehicleError.PlateCannotBeEmpty);
     Branch = branch;
     Model = model;
     Color = color;
