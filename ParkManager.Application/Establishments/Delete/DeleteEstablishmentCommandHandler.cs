@@ -20,7 +20,7 @@ public class DeleteEstablishmentCommandHandler : IRequestHandler<DeleteEstablish
     var establishment = await _repository.GetByIdAsync(request.Id, cancellationToken);
     if (establishment == null)
     {
-      return Result.Failure<bool>(new Error("999","Establishment not found!"));
+      return Result.Failure<bool>(new Error("EstablishmentNotFound", "Establishment not found!"));
     }
 
     try
@@ -29,7 +29,7 @@ public class DeleteEstablishmentCommandHandler : IRequestHandler<DeleteEstablish
     }
     catch (Exception e)
     {
-      return Result.Failure<bool>(new Error("999", $"Error deleting establishment: {e.Message}"));
+      return Result.Failure<bool>(new Error("EstablishmentDelete", $"Error deleting establishment: {e.Message}"));
     }
     
     return Result.Success(true);

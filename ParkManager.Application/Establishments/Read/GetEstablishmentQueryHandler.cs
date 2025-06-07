@@ -17,7 +17,7 @@ public class GetEstablishmentQueryHandler : IRequestHandler<GetEstablishmentQuer
     var establishment = await _repository.GetByIdAsync(request.Id, cancellationToken);
     if (establishment == null)
     {
-      return Result.Failure<EstablishmentResponse>(new Error("999", "Establishment not found!"));
+      return Result.Failure<EstablishmentResponse>(new Error("EstablishmentNotFound", "Establishment not found!"));
     }
 
     var response = EstablishmentResponse.FromEntity(establishment);

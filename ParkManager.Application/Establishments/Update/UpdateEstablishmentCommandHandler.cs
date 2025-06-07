@@ -19,7 +19,7 @@ public class UpdateEstablishmentCommandHandler : IRequestHandler<UpdateEstablish
     var establishment = await _repository.GetByIdAsync(request.Id, cancellationToken);
     if (establishment == null)
     {
-      return Result.Failure<Establishment>(new Error("999", "Establishment not found!"));
+      return Result.Failure<Establishment>(new Error("EstablishmentNotFound", "Establishment not found!"));
     }
 
     establishment.Update(request.Name, request.Cnpj, request.City, request.State, request.Street, request.Number, request.Complement, request.ZipCode, request.Phone, request.MotorcyclesParkingSpaces, request.CarsParkingSpaces);
@@ -34,7 +34,7 @@ public class UpdateEstablishmentCommandHandler : IRequestHandler<UpdateEstablish
     }
     catch (Exception e)
     {
-      return Result.Failure<Establishment>(new Error("999", $"Error updating establishment: {e.Message}"));
+      return Result.Failure<Establishment>(new Error("EstablishmentUpdate", $"Error updating establishment: {e.Message}"));
     }
   }
 }

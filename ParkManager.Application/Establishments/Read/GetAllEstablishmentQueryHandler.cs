@@ -16,7 +16,7 @@ public class GetAllEstablishmentQueryHandler : IRequestHandler<GetAllEstablishme
     var establishments = await _repository.GetAllAsync(cancellationToken);
     if (!establishments.Any())
     {
-      return Result.Failure<List<EstablishmentResponse>>(new Error("999", "There is no Establishment"));
+      return Result.Failure<List<EstablishmentResponse>>(new Error("EstablishmentNotFound", "There is no Establishment"));
     }
 
     var response = EstablishmentResponse.FromEntities(establishments.ToList());

@@ -19,7 +19,7 @@ public class GetDailySummaryGroupByHourQueryHandler : IRequestHandler<GetDailySu
     var establishment = await _establishmentRepository.GetByIdAsync(request.EstablishmentId, cancellationToken);
     if (establishment == null)
     {
-      return Result.Failure<DailySummaryGroupedByHourResponse>(new Error("999", "Establishment not found!"));
+      return Result.Failure<DailySummaryGroupedByHourResponse>(new Error("EstablishmentNotFound", "Establishment not found!"));
     }
 
     var hourSummary = await _establishmentRepository.GetDailySummaryGroupedByHourAsync(request.EstablishmentId, request.Date, cancellationToken);
