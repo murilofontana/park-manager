@@ -47,7 +47,8 @@ public class EstablishmentTests
     var vehicle = VehicleData.CreateMotorcycle();
     establishment.Entry(vehicle, DateTime.Now);
     // Act & Assert
-    Assert.Throws<DomainException>(() => establishment.Entry(vehicle, DateTime.Now));
+    var excepiton = Assert.Throws<DomainException>(() => establishment.Entry(vehicle, DateTime.Now));
+    Assert.Equal(EstablishmentErros.NoAvailableParkingSpacesForMotorcycles, excepiton.Message);
   }
 
   [Fact]
@@ -58,8 +59,22 @@ public class EstablishmentTests
     var vehicle = VehicleData.CreateCar();
     establishment.Entry(vehicle, DateTime.Now);
     // Act & Assert
-    Assert.Throws<DomainException>(() => establishment.Entry(vehicle, DateTime.Now));
+    var exception = Assert.Throws<DomainException>(() => establishment.Entry(vehicle, DateTime.Now));
+    Assert.Equal(EstablishmentErros.NoAvailableParkingSpacesForCars, exception.Message);
   }
+
+  [Fact]
+  public void Entry_Should_Return_VehicleAlreadyParked_When_VehicleIsAlreadyParked()
+  {
+    // Arrange
+    var establishment = EstablishmentData.Create();
+    var vehicle = VehicleData.CreateCar();
+    establishment.Entry(vehicle, DateTime.Now);
+    // Act & Assert
+    var exception = Assert.Throws<DomainException>(() => establishment.Entry(vehicle, DateTime.Now.AddHours(1)));
+    Assert.Equal(EstablishmentErros.VehicleAlreadyParked, exception.Message);
+  }
+
 
   [Fact]
   public void Exit_Should_Return_VehicleNotFoundOrAlreadyExited_When_VehicleNotFound()
@@ -69,7 +84,8 @@ public class EstablishmentTests
     var vehicle = VehicleData.CreateCar();
     var exitDate = DateTime.Now;
     // Act & Assert
-    Assert.Throws<DomainException>(() => establishment.Exit(vehicle.Id, exitDate));
+    var exception = Assert.Throws<DomainException>(() => establishment.Exit(vehicle.Id, exitDate));
+    Assert.Equal(EstablishmentErros.VehicleNotFoundOrAlreadyExited, exception.Message);
   }
 
   [Fact]
@@ -84,7 +100,8 @@ public class EstablishmentTests
     establishment.Exit(vehicle.Id, exitDate);
 
     // Act & Assert
-    Assert.Throws<DomainException>(() => establishment.Exit(vehicle.Id, DateTime.Now.AddHours(2)));
+    var excepetion = Assert.Throws<DomainException>(() => establishment.Exit(vehicle.Id, DateTime.Now.AddHours(2)));
+    Assert.Equal(EstablishmentErros.VehicleNotFoundOrAlreadyExited, excepetion.Message);
   }
 
   [Fact]
@@ -114,5 +131,4 @@ public class EstablishmentTests
       Assert.Equal(EstablishmentErros.InvalidParkingSpaces, exception.Message);
     }
   }
-
 }
