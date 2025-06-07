@@ -1,4 +1,4 @@
-@ParkManager_HostAddress = http://localhost:32772
+@ParkManager_HostAddress = http://localhost:5000
 
 ### Get all establishments
 GET {{ParkManager_HostAddress}}/api/establishment
@@ -26,8 +26,8 @@ Accept: application/json
   "complement": "Casa Azul",
   "zipCode": "37950000",
   "phone": "555881284",
-  "motorcyclesParkingSpaces": 3,
-  "carsParkingSpaces": 4
+  "motorcyclesParkingSpaces": 0,
+  "carsParkingSpaces": 0
 }
 
 ###
@@ -54,7 +54,7 @@ Accept: application/json
 ###
 
 ### Delete an establishment
-DELETE {{ParkManager_HostAddress}}/api/establishment/f043b410-c9e8-434f-9aba-299cf98126e3
+DELETE {{ParkManager_HostAddress}}/api/establishment/f043b410-a9e8-434f-9aba-299cf98126e3
 Accept: application/json
 
 ###
