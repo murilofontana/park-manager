@@ -84,7 +84,7 @@ namespace ParkManager.Controllers.Establishments
         return BadRequest(result.Error);
       }
 
-      return Ok(result.Value);
+      return CreatedAtAction(nameof(Get), new { id = result.Value.Id }, result.Value);
     }
 
     // PUT api/<EstablishmentController>/5
