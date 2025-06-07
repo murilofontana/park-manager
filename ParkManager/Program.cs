@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ParkManager.Application.Abstractions;
+using ParkManager.Extensions;
 using ParkManager.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,9 +29,12 @@ if (app.Environment.IsDevelopment())
   dbContext.Database.Migrate();
 }
 
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCustomExceptionHandler();
 
 app.MapControllers();
 
