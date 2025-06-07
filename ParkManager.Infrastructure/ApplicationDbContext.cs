@@ -33,9 +33,14 @@ namespace ParkManager.Infrastructure
 
         return result;
       }
-      catch (Exception ex)
+      catch (DbUpdateConcurrencyException ex)
       {
-        throw new ConcurrencyException("Concurrency exception occurred.", ex);
+        // Handle concurrency exceptions
+        throw new ConcurrencyException("A concurrency error occurred while saving changes. Please try again.", ex);
+      }
+      catch (Exception)
+      {
+        throw;
       }
     }
 
