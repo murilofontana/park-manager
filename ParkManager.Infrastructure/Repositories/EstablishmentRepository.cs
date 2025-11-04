@@ -37,9 +37,9 @@ public class EstablishmentRepository : RepositoryBase<Establishment>, IEstablish
             -- Query for ENTRIES
             SELECT
                 CAST(strftime('%H', EntryDate) AS INTEGER) AS Hour,
-                SUM(CASE WHEN Type = 0 THEN 1 ELSE 0 END) AS TotalCarsEntry,
+                SUM(CASE WHEN Type = 1 THEN 1 ELSE 0 END) AS TotalCarsEntry,
                 0 AS TotalCarsExit,
-                SUM(CASE WHEN Type = 1 THEN 1 ELSE 0 END) AS TotalMotorcyclesEntry,
+                SUM(CASE WHEN Type = 0 THEN 1 ELSE 0 END) AS TotalMotorcyclesEntry,
                 0 AS TotalMotorcyclesExit
             FROM ParkingMovements
             WHERE EstablishmentId = {0} AND EntryDate >= {1} AND EntryDate < {2}
@@ -51,9 +51,9 @@ public class EstablishmentRepository : RepositoryBase<Establishment>, IEstablish
             SELECT
                 CAST(strftime('%H', ExitDate) AS INTEGER) AS Hour,
                 0 AS TotalCarsEntry,
-                SUM(CASE WHEN Type = 0 THEN 1 ELSE 0 END) AS TotalCarsExit,
+                SUM(CASE WHEN Type = 1 THEN 1 ELSE 0 END) AS TotalCarsExit,
                 0 AS TotalMotorcyclesEntry,
-                SUM(CASE WHEN Type = 1 THEN 1 ELSE 0 END) AS TotalMotorcyclesExit
+                SUM(CASE WHEN Type = 0 THEN 1 ELSE 0 END) AS TotalMotorcyclesExit
             FROM ParkingMovements
             WHERE EstablishmentId = {0} AND ExitDate IS NOT NULL AND ExitDate >= {1} AND ExitDate < {2}
             GROUP BY Hour
