@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ParkManager.Application.Abstractions.Expections;
+using ParkManager.Domain;
 
 namespace ParkManager.Middleware;
 
@@ -57,6 +58,12 @@ internal class ExceptionHandlingMiddleware
           "Validation error",
           "One or more validation errors has occurred",
           validationException.Errors),
+      DomainException domainException => new ExceptionDetails(
+          StatusCodes.Status400BadRequest,
+          "DomainError",
+          "Domain error",
+          domainException.Message,
+          null),
       _ => new ExceptionDetails(
           StatusCodes.Status500InternalServerError,
           "ServerError",
